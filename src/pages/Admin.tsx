@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Edit, Trash2, Eye, EyeOff, LogOut } from 'lucide-react';
-import { Product } from '../types/product';
+import { Product } from '../types/product.ts';
 import { mockProducts } from '../utils/supabase';
 import ManualProductForm from '../components/ManualProductForm';
 import TCGProductForm from '../components/TCGProductForm';
