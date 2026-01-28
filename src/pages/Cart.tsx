@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { CartItem } from '../types/product';
 import { cartService } from '../utils/cart';
 
 // WhatsApp number set by owner (no plus sign or spaces). Example: countrycode + number -> 573236796356
 const WHATSAPP_NUMBER = '573236796356'; // +57 3236796356
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {

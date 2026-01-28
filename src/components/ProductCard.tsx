@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShoppingCart } from 'lucide-react';
-import { Product } from '../types/product';
+import type { Product } from '../types/product';
 import { cartService } from '../utils/cart';
 import { toast } from 'react-toastify';
 
@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="aspect-square overflow-hidden">
         <img
-          src={product.image}
+          src={product.image_url}
           alt={product.name}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         />
@@ -34,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         
         <h3 className="font-semibold text-lg mb-2 line-clamp-2">{product.name}</h3>
         
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.desc}</p>
+        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
         
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-primary">

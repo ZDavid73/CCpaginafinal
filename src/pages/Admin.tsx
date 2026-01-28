@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Edit, Trash2, Eye, EyeOff, LogOut } from 'lucide-react';
-import { Product } from '../types/product.ts';
+import type { Product } from '../types/product.ts';
 import { mockProducts } from '../utils/supabase';
 import ManualProductForm from '../components/ManualProductForm';
 import TCGProductForm from '../components/TCGProductForm';
@@ -181,7 +181,7 @@ export default function Admin() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <img
-                          src={product.image}
+                          src={product.image_url}
                           alt={product.name}
                           className="h-12 w-12 object-cover rounded-lg"
                         />
@@ -190,7 +190,7 @@ export default function Admin() {
                             {product.name}
                           </div>
                           <div className="text-sm text-gray-500 truncate max-w-xs">
-                            {product.desc}
+                            {product.description}
                           </div>
                         </div>
                       </div>

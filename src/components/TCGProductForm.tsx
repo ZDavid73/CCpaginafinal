@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Search } from 'lucide-react';
 import { tcgApiCategories } from '../data/categories';
-import { TCGCard } from '../types/product';
 import { toast } from 'react-toastify';
 
 const tcgProductSchema = z.object({
@@ -22,8 +21,8 @@ interface TCGProductFormProps {
 const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) => {
   const [selectedCategory, setSelectedCategory] = useState(tcgApiCategories[0]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<TCGCard[]>([]);
-  const [selectedCard, setSelectedCard] = useState<TCGCard | null>(null);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [selectedCard, setSelectedCard] = useState<any | null>(null);
   const [isSearching, setIsSearching] = useState(false);
 
   const {

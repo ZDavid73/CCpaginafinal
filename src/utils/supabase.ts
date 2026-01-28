@@ -10,7 +10,7 @@ export const SUPABASE_ANON_KEY = 'sb_publishable_ieTWTY-P9SvYGdNEcSFiA_AqDgv5eA'
 
 // Cliente Supabase activado - ahora funcional
 import { createClient } from '@supabase/supabase-js';
-import { Product } from '../types/product.ts';
+import type { Product } from '../types/product.ts';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -70,28 +70,34 @@ export const mockProducts = [
   {
     uuid: '1',
     name: 'Charizard Card',
-    image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400',
-    desc: 'Rare holographic Charizard trading card',
+    image_url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400',
+    description: 'Rare holographic Charizard trading card',
     price: 299.99,
     category: 'Trading Cards',
-    is_hidden: false
+    is_hidden: false,
+    stock_quantity: 3,
+    created_at: '2023-10-01T12:00:00Z'
   },
   {
     uuid: '2',
     name: 'Settlers of Catan',
-    image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400',
-    desc: 'Classic strategy board game for 3-4 players',
+    image_url: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400',
+    description: 'Classic strategy board game for 3-4 players',
     price: 49.99,
     category: 'Board Games',
-    is_hidden: false
+    is_hidden: false,
+    stock_quantity: 10,
+    created_at: '2023-10-05T15:30:00Z'
   },
   {
     uuid: '3',
     name: 'Space Marine Miniature',
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400',
-    desc: 'Detailed painted miniature figure',
+    image_url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400',
+    description: 'Detailed painted miniature figure',
     price: 24.99,
     category: 'Miniatures',
-    is_hidden: false
+    is_hidden: false,
+    stock_quantity: 15,
+    created_at: '2023-10-10T09:45:00Z'
   }
 ];

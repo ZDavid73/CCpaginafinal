@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import ProductFilters from '../components/ProductFilters';
 import LoginModal from '../components/LoginModal';
-import { Product } from '../types/product';
+import type { Product } from '../types/product';
 import { mockProducts } from '../utils/supabase';
 
 export default function Home() {

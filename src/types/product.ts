@@ -1,4 +1,4 @@
-export interface Product {
+type Product = {
   uuid: string;
   name: string;
   description: string;
@@ -9,3 +9,5 @@ export interface Product {
   stock_quantity: number;
   created_at?: string;
 }
+
+export type { Product };
