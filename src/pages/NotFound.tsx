@@ -118,7 +118,7 @@ export default function NotFound() {
         {/* Footer */}
         <div style={FooterContainer}>
           <Text variant="gray" style={{ fontSize: '0.875rem' }}>
-            © {new Date().getFullYear()} - Meku.dev
+            © {new Date().getFullYear()} - David.dev
           </Text>
         </div>
       </div>
