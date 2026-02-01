@@ -42,7 +42,6 @@ const Admin: React.FC = () => {
     toast.success('Logged out successfully');
   };
 
-  // Crear producto (desde Manual o TCG)
   const handleAddProduct = async (productData: NewProductInput) => {
     try {
       const created = await productService.createProduct(productData);
@@ -56,7 +55,6 @@ const Admin: React.FC = () => {
     }
   };
 
-  // Guardar edición
   const handleUpdateProduct = async (data: NewProductInput) => {
     if (!editingProduct) return;
     try {
@@ -104,7 +102,6 @@ const Admin: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -120,9 +117,7 @@ const Admin: React.FC = () => {
         </div>
       </header>
 
-      {/* Main */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Top actions */}
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold text-gray-900">Manage Products</h2>
           <div className="flex space-x-3">
@@ -149,7 +144,6 @@ const Admin: React.FC = () => {
           </div>
         </div>
 
-        {/* Add / Edit forms */}
         {showAddForm === 'manual' && !editingProduct && (
           <div className="mb-8">
             <ManualProductForm
@@ -180,7 +174,6 @@ const Admin: React.FC = () => {
           </div>
         )}
 
-        {/* Products table */}
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
