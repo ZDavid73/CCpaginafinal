@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import cartService from '../utils/cart';
+import { cartService } from '../utils/cart';
 import type { Product } from '../types/product';
 import { Container, Tittle, Text, Button } from '../components/styledcomponents';
 
