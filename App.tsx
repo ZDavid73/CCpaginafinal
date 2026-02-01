@@ -1,3 +1,4 @@
+// App.tsx
 import React from 'react';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
@@ -5,7 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from './src/pages/Home';
+import Landing from './src/pages/Landing';
+import Products from './src/pages/Products';
 import About from './src/pages/About';
 import Contact from './src/pages/Contact';
 import Cart from './src/pages/Cart';
@@ -14,28 +16,21 @@ import NotFound from './src/pages/NotFound';
 
 const App: React.FC = () => {
   return (
-    <Theme appearance="inherit" radius="large" scaling="100%">
+    <Theme>
       <Router>
-        <main className="min-h-screen font-sans">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            newestOnTop
-            closeOnClick
-            pauseOnHover
-          />
-        </main>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </Router>
+      <ToastContainer position="top-right" autoClose={3000} />
     </Theme>
   );
-}
+};
 
 export default App;
