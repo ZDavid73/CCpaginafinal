@@ -3,93 +3,7 @@ import { ShoppingCart } from 'lucide-react';
 import type { Product } from '../types/product';
 import { cartService } from '../utils/cart';
 import { toast } from 'react-toastify';
-import styled from 'styled-components';
 
-// Styled Components
-const Card = styled.div`
-  background-color: #2D2D2D;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  font-family: 'Sora', sans-serif;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  }
-`;
-
-const CardImage = styled.img`
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-`;
-
-const CardContent = styled.div`
-  padding: 1rem;
-  position: relative;
-`;
-
-const CategoryBadge = styled.span`
-  position: absolute;
-  top: -8rem;
-  right: 1rem;
-  background-color: #a71fd0;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  text-transform: uppercase;
-`;
-
-const ProductTitle = styled.h3`
-  color: #ffffff;
-  font-size: 1.125rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-`;
-
-const ProductDescription = styled.p`
-  color: #D2D2D2;
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
-  line-height: 1.4;
-`;
-
-const PriceRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Price = styled.span`
-  color: #a71fd0;
-  font-size: 1.25rem;
-  font-weight: bold;
-`;
-
-const AddButton = styled.button`
-  background-color: #40C485;
-  color: #ffffff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background-color 0.3s ease;
-  font-family: 'Sora', sans-serif;
-
-  &:hover {
-    background-color: #008f4a;
-  }
-`;
-
-// Component
 interface ProductCardProps {
   product: Product;
 }
@@ -102,21 +16,43 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Card>
-      <CardImage src={product.image_url} alt={product.name} />
-      <CardContent>
-        <CategoryBadge>{product.category}</CategoryBadge>
-        <ProductTitle>{product.name}</ProductTitle>
-        <ProductDescription>{product.description}</ProductDescription>
-        <PriceRow>
-          <Price>${product.price.toFixed(2)}</Price>
-          <AddButton onClick={handleAddToCart}>
-            <ShoppingCart size={16} />
+    <div className="group bg-[#2D2D2D] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 font-sora">
+      <div className="relative overflow-hidden">
+        <img 
+          src={product.image_url} 
+          alt={product.name}
+          className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+        <span className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10">
+          {product.category}
+        </span>
+      </div>
+
+      <div className="p-6 relative">
+        <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 leading-tight">
+          {product.name}
+        </h3>
+
+        <p className="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+          {product.description}
+        </p>
+
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-lg">
+            ${product.price.toFixed(2)}
+          </span>
+          
+          <button
+            onClick={handleAddToCart}
+            className="group/add bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
+          >
+            <ShoppingCart size={20} className="group-hover/add:rotate-12 transition-transform duration-200" />
             Add to Cart
-          </AddButton>
-        </PriceRow>
-      </CardContent>
-    </Card>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

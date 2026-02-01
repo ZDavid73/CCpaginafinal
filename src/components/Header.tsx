@@ -4,7 +4,6 @@ import { ShoppingCart, Menu, X } from 'lucide-react';
 import { cartService } from '../utils/cart';
 import styled from 'styled-components';
 
-// Styled Components
 const HeaderContainer = styled.header`
   background-color: #2D2D2D;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -125,7 +124,6 @@ const MobileNavLink = styled(Link)<{ $isActive: boolean }>`
   }
 `;
 
-// Component
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(cartService.getCart().length);

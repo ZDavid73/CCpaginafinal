@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-// Styled Components
 const ModalOverlay = styled.div`
   position: fixed;
   inset: 0;
@@ -130,7 +129,6 @@ const DemoCredentials = styled.div`
   }
 `;
 
-// Component
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;

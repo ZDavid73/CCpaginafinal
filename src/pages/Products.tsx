@@ -1,4 +1,3 @@
-// src/pages/Products.tsx
 import React, { useState, useEffect } from 'react';
 import { Key } from 'lucide-react';
 import Header from '../components/Header';

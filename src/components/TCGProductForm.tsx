@@ -1,17 +1,16 @@
-// src/components/TCGProductForm.tsx
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Search } from 'lucide-react';
-import { categories } from '../data/categories';  // ✅ Categorías normales
+import { categories } from '../data/categories'; 
 import { tcgApiCategories } from '../data/categories';
 import { toast } from 'react-toastify';
 
 const tcgProductSchema = z.object({
   price: z.number().min(0.01, 'Price must be greater than 0'),
   desc: z.string().optional(),
-  category: z.string().min(1, 'Category is required'),  // ✅ Nueva validación
+  category: z.string().min(1, 'Category is required'),  
 });
 
 type TCGProductFormData = z.infer<typeof tcgProductSchema>;
@@ -23,7 +22,7 @@ interface TCGProductFormProps {
 
 const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) => {
   const [selectedTCGCategory, setSelectedTCGCategory] = useState(tcgApiCategories[0]);
-  const [selectedCategory, setSelectedCategory] = useState('Trading Cards');  // ✅ Default Trading Cards
+  const [selectedCategory, setSelectedCategory] = useState('Trading Cards');  
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedCard, setSelectedCard] = useState<any>(null);
@@ -37,11 +36,10 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
   } = useForm<TCGProductFormData>({
     resolver: zodResolver(tcgProductSchema),
     defaultValues: {
-      category: 'Trading Cards',  // ✅ Default
+      category: 'Trading Cards',  
     }
   });
 
-  // Debounced search
   useEffect(() => {
     if (!searchQuery.trim()) {
       setSearchResults([]);
@@ -99,7 +97,7 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
         image_url: selectedCard.image,
         price: data.price,
         description: data.desc || selectedCard.description || '',
-        category: data.category,  // ✅ Usa la categoría seleccionada
+        category: data.category,  
       });
       toast.success('Product added successfully!');
     } catch (error) {
@@ -112,7 +110,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
       <h3 className="text-xl font-semibold text-gray-900 mb-6">Add Product from TCG API</h3>
 
       <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-5">
-        {/* TCG Category Selector */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             TCG Source
@@ -142,8 +139,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
             </p>
           )}
         </div>
-
-        {/* Product Category Selector ✅ NUEVO */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Store Category
@@ -163,8 +158,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
             <p className="text-red-600 text-sm mt-1.5">{errors.category.message}</p>
           )}
         </div>
-
-        {/* Search Cards */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Search Cards
@@ -185,8 +178,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
               </div>
             )}
           </div>
-
-          {/* Search by ID Toggle */}
           <div className="flex items-center gap-2 mt-2">
             <input
               type="checkbox"
@@ -196,8 +187,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
             />
             <label className="text-sm text-gray-700">Search by ID</label>
           </div>
-
-          {/* Search Results */}
           {searchResults.length > 0 && (
             <div className="mt-3 max-h-96 overflow-y-auto">
               <div className="grid gap-3 grid-cols-2 md:grid-cols-3">
@@ -238,8 +227,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
             </div>
           )}
         </div>
-
-        {/* Selected Card Preview */}
         {selectedCard && (
           <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-4 rounded-xl border-2 border-blue-100 shadow-sm">
             <p className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
@@ -267,8 +254,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
             </div>
           </div>
         )}
-
-        {/* Price */}
         <div>
           <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
             Price ($)
@@ -285,8 +270,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
             <p className="text-red-600 text-sm mt-1.5">{errors.price.message}</p>
           )}
         </div>
-
-        {/* Additional Description */}
         <div>
           <label htmlFor="desc" className="block text-sm font-medium text-gray-700 mb-2">
             Additional Description (Optional)
@@ -299,8 +282,6 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
             placeholder="Add extra details about this product..."
           />
         </div>
-
-        {/* Action Buttons */}
         <div className="flex gap-3 pt-6 border-t border-gray-200">
           <button
             type="submit"

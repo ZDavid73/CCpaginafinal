@@ -2,7 +2,6 @@ import React from 'react';
 import { categories } from '../data/categories';
 import styled from 'styled-components';
 
-// Styled Components
 const FiltersContainer = styled.div`
   padding: 1rem;
   background-color: #2D2D2D;
@@ -36,8 +35,6 @@ const FilterButton = styled.button<{ $isActive: boolean }>`
     background-color: ${props => props.$isActive ? '#7f00a5' : 'rgba(255, 255, 255, 0.05)'};
   }
 `;
-
-// Component
 interface ProductFiltersProps {
   selectedCategory: string;
   onCategoryChange: (category: string) => void;

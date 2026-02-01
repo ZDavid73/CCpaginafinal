@@ -1,4 +1,3 @@
-// src/components/ManualProductForm.tsx
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -31,7 +30,7 @@ const ManualProductForm: React.FC<ManualProductFormProps> = ({
 
   const {
     register,
-    handleSubmit, // ✅ Necesario para el form
+    handleSubmit, 
     watch,
     formState: { errors, isSubmitting },
   } = useForm<ProductFormData>({
@@ -79,13 +78,11 @@ const ManualProductForm: React.FC<ManualProductFormProps> = ({
         Add Product Manually
       </h3>
 
-      {/* ✅ CAMBIO AQUÍ: handleSubmit(onSubmitForm) */}
       <form
         onSubmit={handleSubmit(onSubmitForm)}
         className="space-y-5"
         noValidate
       >
-        {/* Product Name */}
         <div>
           <label
             htmlFor="name"
@@ -107,7 +104,6 @@ const ManualProductForm: React.FC<ManualProductFormProps> = ({
           )}
         </div>
 
-        {/* Description */}
         <div>
           <label
             htmlFor="desc"
@@ -129,7 +125,6 @@ const ManualProductForm: React.FC<ManualProductFormProps> = ({
           )}
         </div>
 
-        {/* Price */}
         <div>
           <label
             htmlFor="price"
@@ -152,7 +147,6 @@ const ManualProductForm: React.FC<ManualProductFormProps> = ({
           )}
         </div>
 
-        {/* Stock */}
         <div>
           <label
             htmlFor="stock_quantity"
@@ -174,7 +168,6 @@ const ManualProductForm: React.FC<ManualProductFormProps> = ({
           )}
         </div>
 
-        {/* Category */}
         <div>
           <label
             htmlFor="category"
@@ -201,7 +194,6 @@ const ManualProductForm: React.FC<ManualProductFormProps> = ({
           )}
         </div>
 
-        {/* Image URL */}
         <div>
           <label
             htmlFor="image"

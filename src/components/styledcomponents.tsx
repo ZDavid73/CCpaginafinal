@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-
-// Estilos generales de textoHome
 export const TextHome = styled.p`
   color: #ffffff; 
   text-align:left;
@@ -14,8 +12,6 @@ export const TextHome = styled.p`
     margin-bottom: 10px;
   }
 `;
-
-// Estilos generales de botones
 const buttonVariants = {
   purple: {
     bgColor: '#a71fd0',
@@ -145,8 +141,6 @@ export const ButtonForm = styled.button<{ variant: 'purpleForm' | 'grayForm' | '
     padding: 4px 10px;
   }
 `;
-
-// Estilo generales inputs
 const inputVariants = {
   searchwhite: {
     textColor: '#2D2D2D',
@@ -255,8 +249,6 @@ export const Input = styled.input<{ variant: 'searchwhite' | 'searchgray' | 'box
     font-size: ${(props) => inputVariants[props.variant].fontSize.small};
   }
 `;
-
-// Estilos generales de texto
 const textVariants = {
   white: {
     textColor: '#ffffff',
@@ -327,8 +319,6 @@ export const TextLogo = styled.p`
     font-size: 35px;
   }
 `;
-
-// Estilos generales de contenedores (divs)
 const divVariants = {
   bigopacity: {
     padding: {

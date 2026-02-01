@@ -1,4 +1,3 @@
-// src/pages/Landing.tsx - EXACTAMENTE como tu HTML
 import React, { useEffect, useState, useRef } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -43,7 +42,6 @@ const Landing: React.FC = () => {
     loadLatestProducts();
   }, []);
 
-  // Auto-rotate exacto como JS
   useEffect(() => {
     let currentIndex = 0;
     const images = document.querySelectorAll('.img');
@@ -59,7 +57,6 @@ const Landing: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Tilt EXACTAMENTE como tu HTML (DOMMatrix)
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
@@ -69,7 +66,6 @@ const Landing: React.FC = () => {
       const x = (e.clientX - rect.left - rect.width / 2) / 15;
       const y = (e.clientY - rect.top - rect.height / 2) / 15;
 
-      // DOMMatrix EXACTO como tu HTML
       const matrix = new DOMMatrix()
         .translate(0, 0, 0)
         .rotateAxisAngle(1, 0, 0, y * 0.3)
@@ -200,7 +196,6 @@ const Landing: React.FC = () => {
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 py-12">
-        {/* Hero EXACTO como HTML */}
         <section className="heroSection">
           <div className="heroContent">
             <h1 className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-400 bg-clip-text text-transparent drop-shadow-2xl">
@@ -217,7 +212,6 @@ const Landing: React.FC = () => {
             </a>
           </div>
 
-          {/* Card Tilt EXACTA */}
           <div className="card-container">
             <div className="card" ref={cardRef}>
               <div className="card-images">
@@ -236,7 +230,6 @@ const Landing: React.FC = () => {
           </div>
         </section>
 
-        {/* Productos abajo */}
         {!isLoading && (
           <section className="mt-24">
             {latestProducts.length === 0 ? (
