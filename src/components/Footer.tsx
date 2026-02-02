@@ -92,16 +92,6 @@ const Footer = () => {
         </FooterSection>
 
         <FooterSection>
-          <h3>Enlaces Rápidos</h3>
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="../pages/Products.tsx">Productos</a></li>
-            <li><a href="../pages/About.tsx">Nosotros</a></li>
-            <li><a href="../pages/Contact.tsx">Contacto</a></li>
-          </ul>
-        </FooterSection>
-
-        <FooterSection>
           <h3>Síguenos</h3>
           <SocialLinks>
             <SocialLink href="#" aria-label="Facebook">
