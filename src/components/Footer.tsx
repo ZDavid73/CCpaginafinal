@@ -95,9 +95,9 @@ const Footer = () => {
           <h3>Enlaces Rápidos</h3>
           <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="/products">Productos</a></li>
-            <li><a href="/about">Nosotros</a></li>
-            <li><a href="/contact">Contacto</a></li>
+            <li><a href="../pages/Products.tsx">Productos</a></li>
+            <li><a href="../pages/About.tsx">Nosotros</a></li>
+            <li><a href="../pages/Contact.tsx">Contacto</a></li>
           </ul>
         </FooterSection>
 

@@ -205,7 +205,7 @@ const Landing: React.FC = () => {
               Mira las últimas cartas que han salido en la tienda.
             </p>
             <a 
-              href="/products"
+              href="/Products"
               className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-10 py-5 rounded-2xl text-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 inline-flex items-center gap-3"
             >
               Catálogo Completo →

@@ -10,7 +10,7 @@ export const categories = [
 export const tcgApiCategories = [
   {
     name: 'One Piece',
-    endpoint: '/api/api/one-piece/cards'
+    endpoint: 'https://cors-anywhere.herokuapp.com/https://apitcg.com/api/one-piece/cards'
   },
   {
     name: 'Pokémon',
