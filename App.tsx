@@ -3,7 +3,7 @@ import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Landing from './src/pages/Landing';
 import About from './src/pages/About';
