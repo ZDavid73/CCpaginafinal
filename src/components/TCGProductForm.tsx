@@ -55,12 +55,10 @@ const TCGProductForm: React.FC<TCGProductFormProps> = ({ onSubmit, onCancel }) =
       setIsSearching(true);
       const finalEndpoint = `${selectedTCGCategory.endpoint}?${searchById ? 'id' : 'name'}=${encodeURIComponent(searchQuery)}`;
 
+      const fetchFunction = `/.netlify/functions/searchCards?url=${finalEndpoint}`;
+
       try {
-        const response = await fetch(finalEndpoint, {
-          headers: {
-            'x-api-key': '5ee0cf9c56cbe6dc3ee06d1bacb899d872b9a7858fe48df118743fce993267f5'
-          }
-        });
+        const response = await fetch(fetchFunction);
 
         if (response.ok) {
           const data = await response.json();
