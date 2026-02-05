@@ -44,10 +44,10 @@ export default function About() {
         
         <Container variant="big">
           <Tittle variant="purple">
-            Próximamente
+            Sobre Nosotros
           </Tittle>
           <Text variant="white" style={{ marginBottom: '1rem' }}>
-            Usa David para generar contenido para esta página
+            Es la plataforma y mercado en línea líder en Colombia para comprar juegos de cartas coleccionables (TCG) como Magic: The Gathering, Pokémon y Yu-Gi-Oh!.
           </Text>
         </Container>
       </main>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Product } from '../types/product';
 import { cartService } from '../utils/cart';
 import { toast } from 'react-toastify';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Button, Text } from './styledcomponents';
 
 const CardWrapper = styled.div`
@@ -19,6 +19,7 @@ const CardWrapper = styled.div`
   flex-direction: row;
   position: relative;
   gap: 0;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-3px);
@@ -188,14 +189,143 @@ const BuyButton = styled(Button)`
   width: 100%;
 `;
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-  const handleAddToCart = () => {
-    cartService.addToCart(product);
-    toast.success(`¡${product.name} agregado al carrito!`);
-    window.dispatchEvent(new Event('cartUpdated'));
-  };
+// Modal Styles
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
-  // Formatear precio a pesos colombianos
+const scaleIn = keyframes`
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
+
+const ModalOverlay = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: ${props => props.isOpen ? 'flex' : 'none'};
+  align-items: center;
+  justify-content: center;
+  animation: ${fadeIn} 0.3s ease-out;
+`;
+
+const ModalContent = styled.div<{ isOpen: boolean }>`
+  background: linear-gradient(145deg, #1F1F1F, #111111);
+  border-radius: 20px;
+  border: 1px solid rgba(167, 31, 208, 0.3);
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 600px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(167, 31, 208, 0.4);
+  animation: ${scaleIn} 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow-y: auto;
+  transform: ${props => props.isOpen ? 'scale(1)' : 'scale(0.8)'};
+
+  @media (max-width: 700px) {
+    width: 95vw;
+    padding: 20px;
+    margin: 20px;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: rgba(167, 31, 208, 0.2);
+  border: 1px solid rgba(167, 31, 208, 0.4);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(167, 31, 208, 0.4);
+    transform: scale(1.1);
+  }
+`;
+
+const ModalImage = styled.img`
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 20px;
+`;
+
+const ModalTitle = styled.h2`
+  font-family: 'Sora', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+`;
+
+const ModalDescription = styled.p`
+  color: #D1D5DB;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+`;
+
+const ModalPrice = styled.div`
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #a71fd0 0%, #ff6b9d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+`;
+
+const ModalButtons = styled.div`
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+`;
+
+interface ProductModalProps {
+  product: Product;
+  isOpen: boolean;
+  onClose: () => void;
+  onAddToCart: () => void;
+}
+
+const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose, onAddToCart }) => {
   const formattedPrice = new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',
@@ -204,26 +334,82 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   }).format(product.price);
 
   return (
-    <CardWrapper>
-      <ImageArea>
-        <CardImage src={product.image_url} alt={product.name} />
-        <CategoryBox>{product.category}</CategoryBox>
-      </ImageArea>
-      
-      <ContentBox>
-        <TitleBox>
-          <CardTitle>{product.name}</CardTitle>
-          <CardDescription>{product.description}</CardDescription>
-        </TitleBox>
-        
-        <PriceButtonBox>
-          <PriceBox>{formattedPrice}</PriceBox>
-          <BuyButton variant="green" onClick={handleAddToCart}>
-            Comprar
+    <ModalOverlay isOpen={isOpen} onClick={onClose}>
+      <ModalContent isOpen={isOpen} onClick={e => e.stopPropagation()}>
+        <CloseButton onClick={onClose}>&times;</CloseButton>
+        <ModalImage src={product.image_url} alt={product.name} />
+        <ModalTitle>{product.name}</ModalTitle>
+        <ModalDescription>{product.description}</ModalDescription>
+        <ModalPrice>{formattedPrice}</ModalPrice>
+        <ModalButtons>
+          <BuyButton variant="green" onClick={onAddToCart} style={{ flex: 1 }}>
+            Agregar al carrito
           </BuyButton>
-        </PriceButtonBox>
-      </ContentBox>
-    </CardWrapper>
+          <Button variant="gray" onClick={onClose} style={{ flex: 1 }}>
+            Cerrar
+          </Button>
+        </ModalButtons>
+      </ModalContent>
+    </ModalOverlay>
+  );
+};
+
+interface ProductCardProps {
+  product: Product;
+  className?: string;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddToCart = () => {
+    cartService.addToCart(product);
+    toast.success(`¡${product.name} agregado al carrito!`);
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    // No abrir modal si se hace clic en el botón comprar
+    if (e.target instanceof Element && e.target.closest('button')) return;
+    setIsModalOpen(true);
+  };
+
+  const formattedPrice = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(product.price);
+
+  return (
+    <>
+      <CardWrapper className={className} onClick={handleCardClick}>
+        <ImageArea>
+          <CardImage src={product.image_url} alt={product.name} />
+          <CategoryBox>{product.category}</CategoryBox>
+        </ImageArea>
+        
+        <ContentBox>
+          <TitleBox>
+            <CardTitle>{product.name}</CardTitle>
+            <CardDescription>{product.description}</CardDescription>
+          </TitleBox>
+          
+          <PriceButtonBox>
+            <PriceBox>{formattedPrice}</PriceBox>
+            <BuyButton variant="green" onClick={handleAddToCart}>
+              Comprar
+            </BuyButton>
+          </PriceButtonBox>
+        </ContentBox>
+      </CardWrapper>
+      <ProductModal
+        product={product}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddToCart={handleAddToCart}
+      />
+    </>
   );
 };
 

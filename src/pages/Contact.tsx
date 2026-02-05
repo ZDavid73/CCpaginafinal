@@ -44,10 +44,10 @@ export default function Contact() {
         
         <Container variant="big">
           <Tittle variant="purple">
-            Próximamente
+            Contacto
           </Tittle>
           <Text variant="white" style={{ marginBottom: '1rem' }}>
-            Usa DaVID para generar contenido para esta página
+            Numero de telefono +57 3236796356
           </Text>
         </Container>
       </main>

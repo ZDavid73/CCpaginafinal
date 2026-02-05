@@ -6,7 +6,6 @@ import type { Product } from '../types/product';
 import { productService } from '../utils/supabase';
 import { Link } from 'react-router-dom';
 
-
 const Landing: React.FC = () => {
   const [latestProducts, setLatestProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -74,12 +73,13 @@ const Landing: React.FC = () => {
         .rotateAxisAngle(0, 1, 0, -x * 0.3)
         .scale3d(1.03, 1.03, 1)
         .toString();
-      
+
       card.style.transform = matrix;
     };
 
     const handleMouseLeave = () => {
-      card.style.transform = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
+      card.style.transform =
+        'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
     };
 
     card.addEventListener('mousemove', handleMouseMove);
@@ -103,73 +103,87 @@ const Landing: React.FC = () => {
           align-items: center;
           gap: 4rem;
           padding: 2rem;
+          position: relative;
+          overflow: hidden;
         }
+
+        /* Imagen decorativa mejorando cobertura */
+        .bg-deco {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          opacity: 0.28;
+          filter: blur(1px);
+          transform: scale(1);
+          clip-path: inset(0% 0% 0% 0%); 
+        }
+
         .card-container {
           width: 320px;
           height: 450px;
           perspective: 1200px;
           flex-shrink: 0;
+          position: relative;
+          z-index: 2;
         }
+
         .card {
           position: relative;
           width: 100%;
           height: 100%;
           transform-style: preserve-3d;
           transition: box-shadow 0.4s ease;
-          pointer-events: all;
           border-radius: 15px;
           overflow: hidden;
         }
-        /* Bordes curvos TCG oficiales EXACTOS */
+
         .card-images, .shine {
-          border-bottom-left-radius: 4.25% 3%;
-          border-bottom-right-radius: 4.25% 3%;
-          border-top-left-radius: 4.35% 3%;
-          border-top-right-radius: 4.25% 3%;
+          border-radius: 12px;
           overflow: hidden;
           width: 100%;
           height: 100%;
           backface-visibility: hidden;
         }
+
         .card-images {
           position: relative;
           transform: translateZ(4px);
         }
+
         .img {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
           object-fit: cover;
           transition: opacity 1s ease-in-out;
           opacity: 0;
         }
-        .img.active {
-          opacity: 1;
-        }
-        /* SHINE FUERTE EXACTO */
+        .img.active { opacity: 1; }
+
         .shine {
           position: absolute;
           top: 0;
           left: -100%;
           width: 60%;
           height: 100%;
-          background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 40%, rgba(255,255,255,0.2) 60%, transparent 100%);
+          background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0.2) 60%, transparent 100%);
           transform: translateZ(3px);
-          transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition: left 0.8s;
           pointer-events: none;
         }
-        /* HOVER EXACTO */
+
         .card:hover {
-          box-shadow: 
+          box-shadow:
             0 0 50px rgba(255,255,255,0.6),
             0 0 100px rgba(222,175,79,0.8),
             inset 0 0 50px rgba(255,255,255,0.2);
         }
-        .card:hover .shine {
-          left: 140%;
-        }
+
+        .card:hover .shine { left: 140%; }
+
         .heroContent {
           flex: 1;
           display: flex;
@@ -178,20 +192,13 @@ const Landing: React.FC = () => {
           align-items: center;
           text-align: center;
           max-width: 500px;
+          position: relative;
+          z-index: 1;
         }
+
         @media (min-width: 1024px) {
-          .heroSection {
-            flex-direction: row;
-            gap: 6rem;
-          }
-          .heroContent {
-            text-align: left;
-            align-items: flex-start;
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .img, .shine { transition: none; }
-          .card { transform: none !important; }
+          .heroSection { flex-direction: row; gap: 6rem; }
+          .heroContent { text-align: left; align-items: flex-start; }
         }
       `}</style>
 
@@ -199,6 +206,12 @@ const Landing: React.FC = () => {
 
       <main className="max-w-7xl mx-auto px-4 py-12">
         <section className="heroSection">
+          <img
+            src="https://tcg.victoryroad.pro/wp-content/uploads/2025/02/bdec0829-9ffb-41f1-82b8-b05ab55465f2.jpg"
+            alt="Decorativo One Piece"
+            className="bg-deco"
+          />
+
           <div className="heroContent">
             <h1 className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-400 bg-clip-text text-transparent drop-shadow-2xl">
               Cartas Recientes
@@ -207,12 +220,11 @@ const Landing: React.FC = () => {
               Mira las últimas cartas que han salido en la tienda.
             </p>
             <Link
-  to="/products"
-  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-10 py-5 rounded-2xl text-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 inline-flex items-center gap-3"
->
-  Catálogo Completo
-</Link>
-
+              to="/products"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-10 py-5 rounded-2xl text-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 inline-flex items-center gap-3"
+            >
+              Catálogo Completo
+            </Link>
           </div>
 
           <div className="card-container">
